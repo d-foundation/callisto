@@ -1,0 +1,28 @@
+table:
+  schema: public
+  name: message
+object_relationships:
+  - name: message_type
+    using:
+      foreign_key_constraint_on: type
+  - name: transaction
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: transaction
+        insertion_order: null
+        column_mapping:
+          transaction_hash: hash
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - transaction_hash
+        - index
+        - type
+        - value
+        - involved_accounts_addresses
+        - height
+      filter: {}
+      limit: 100

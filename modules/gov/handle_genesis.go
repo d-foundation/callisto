@@ -8,8 +8,8 @@ import (
 
 	"github.com/forbole/callisto/v4/types"
 
-	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
+	dgovtypes "github.com/d-foundation/protocol/x/dgov/types"
 	"github.com/rs/zerolog/log"
 )
 
@@ -18,20 +18,20 @@ func (m *Module) HandleGenesis(doc *tmtypes.GenesisDoc, appState map[string]json
 	log.Debug().Str("module", "gov").Msg("parsing genesis")
 
 	// Read the genesis state
-	var genStatev1beta1 govtypesv1.GenesisState
-	err := m.cdc.UnmarshalJSON(appState[gov.ModuleName], &genStatev1beta1)
+	var genStatedgov dgovtypes.GenesisState
+	err := m.cdc.UnmarshalJSON(appState[dgovtypes.ModuleName], &genStatedgov)
 	if err != nil {
 		return fmt.Errorf("error while reading gov genesis data: %s", err)
 	}
 
 	// Save the proposals
-	err = m.saveGenesisProposals(genStatev1beta1.Proposals, doc)
+	err = m.saveGenesisProposals(genStatedgov.GovGenesisState.Proposals, doc)
 	if err != nil {
 		return fmt.Errorf("error while storing genesis governance proposals: %s", err)
 	}
 
 	// Save the params
-	err = m.db.SaveGovParams(types.NewGovParams(genStatev1beta1.Params, doc.InitialHeight))
+	err = m.db.SaveGovParams(types.NewGovParams(genStatedgov.GovGenesisState.Params, doc.InitialHeight))
 	if err != nil {
 		return fmt.Errorf("error while storing genesis governance params: %s", err)
 	}

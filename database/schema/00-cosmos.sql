@@ -114,13 +114,25 @@ $$ LANGUAGE sql STABLE;
 CREATE FUNCTION messages_by_type(
   types text [],
   "limit" bigint DEFAULT 100,
-  "offset" bigint DEFAULT 0) 
-  RETURNS SETOF message AS 
-$$ 
+  "offset" bigint DEFAULT 0)
+  RETURNS SETOF message AS
+$$
 SELECT * FROM message
 WHERE (cardinality(types) = 0 OR type = ANY (types))
-ORDER BY height DESC LIMIT "limit" OFFSET "offset" 
+ORDER BY height DESC LIMIT "limit" OFFSET "offset"
 $$ LANGUAGE sql STABLE;
+
+CREATE OR REPLACE FUNCTION messages_types_by_address(
+  addresses text[],
+  "limit" integer DEFAULT 100,
+  "offset" integer DEFAULT 0
+) RETURNS SETOF message LANGUAGE sql STABLE AS $function$
+  SELECT DISTINCT ON (type) *
+  FROM message
+  WHERE addresses && involved_accounts_addresses
+  ORDER BY type DESC
+  LIMIT "limit" OFFSET "offset";
+$function$;
 
 CREATE TABLE pruning
 (

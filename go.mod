@@ -2,16 +2,30 @@ module github.com/forbole/callisto/v4
 
 go 1.21
 
+replace (
+	github.com/cosmos/cosmos-sdk => github.com/d-foundation/cosmos-sdk v0.0.0-20240820023506-6f2d52be7a55
+	github.com/forbole/juno/v6 => github.com/d-foundation/juno/v6 v6.0.1-dchain
+	//github.com/cosmos/cosmos-sdk => ../cosmos-sdk/
+	// Fix upstream GHSA-h395-qcrw-5vmq vulnerability.
+	// TODO Remove it: https://github.com/cosmos/cosmos-sdk/issues/10409
+	github.com/gin-gonic/gin => github.com/gin-gonic/gin v1.7.0
+	github.com/prometheus/client_golang => github.com/prometheus/client_golang v1.18.0
+	github.com/prometheus/common => github.com/prometheus/common v0.47.0
+	// Downgraded to avoid bugs in following commits which caused simulations to fail.
+	github.com/syndtr/goleveldb => github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
+)
+
 require (
-	cosmossdk.io/log v1.3.1
+	cosmossdk.io/log v1.4.1
 	cosmossdk.io/math v1.3.0
 	cosmossdk.io/store v1.1.0
-	cosmossdk.io/x/evidence v0.1.1
+	cosmossdk.io/x/evidence v0.1.0
 	cosmossdk.io/x/feegrant v0.1.1
-	cosmossdk.io/x/upgrade v0.1.3
+	cosmossdk.io/x/upgrade v0.1.0
 	github.com/cometbft/cometbft v0.38.7
 	github.com/cosmos/cosmos-sdk v0.50.7
-	github.com/cosmos/gogoproto v1.5.0
+	github.com/cosmos/gogoproto v1.4.12
+	github.com/d-foundation/protocol v0.3.0
 	github.com/forbole/juno/v6 v6.0.1
 	github.com/go-co-op/gocron v1.37.0
 	github.com/golangci/golangci-lint v1.55.2
@@ -20,7 +34,7 @@ require (
 	github.com/pelletier/go-toml v1.9.5
 	github.com/prometheus/client_golang v1.19.0
 	github.com/proullon/ramsql v0.1.3
-	github.com/rs/zerolog v1.32.0
+	github.com/rs/zerolog v1.33.0
 	github.com/spf13/cobra v1.8.0
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/grpc v1.63.2
@@ -40,7 +54,7 @@ require (
 	cosmossdk.io/core v0.11.0 // indirect
 	cosmossdk.io/depinject v1.0.0-alpha.4 // indirect
 	cosmossdk.io/errors v1.0.1 // indirect
-	cosmossdk.io/x/tx v0.13.3 // indirect
+	cosmossdk.io/x/tx v0.13.4 // indirect
 	filippo.io/edwards25519 v1.0.0 // indirect
 	github.com/4meepo/tagalign v1.3.3 // indirect
 	github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4 // indirect
@@ -50,6 +64,8 @@ require (
 	github.com/Antonboom/nilnil v0.1.7 // indirect
 	github.com/Antonboom/testifylint v0.2.3 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
+	github.com/CosmWasm/wasmd v0.50.0 // indirect
+	github.com/CosmWasm/wasmvm v1.5.0 // indirect
 	github.com/DataDog/datadog-go v3.2.0+incompatible // indirect
 	github.com/DataDog/zstd v1.5.5 // indirect
 	github.com/Djarvur/go-err113 v0.0.0-20210108212216-aea10b59be24 // indirect
@@ -97,6 +113,8 @@ require (
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/cosmos/gogogateway v1.2.0 // indirect
 	github.com/cosmos/iavl v1.1.2 // indirect
+	github.com/cosmos/ibc-go/modules/capability v1.0.0 // indirect
+	github.com/cosmos/ibc-go/v8 v8.0.0 // indirect
 	github.com/cosmos/ics23/go v0.10.0 // indirect
 	github.com/cosmos/ledger-cosmos-go v0.13.3 // indirect
 	github.com/curioswitch/go-reassign v0.2.0 // indirect
@@ -109,6 +127,7 @@ require (
 	github.com/dgraph-io/badger/v2 v2.2007.4 // indirect
 	github.com/dgraph-io/ristretto v0.1.1 // indirect
 	github.com/dgryski/go-farm v0.0.0-20200201041132-a6ae2369ad13 // indirect
+	github.com/distribution/reference v0.5.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/dvsekhvalnov/jose2go v1.6.0 // indirect
 	github.com/emicklei/dot v1.6.1 // indirect
@@ -163,8 +182,8 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/googleapis/gax-go/v2 v2.12.0 // indirect
 	github.com/gordonklaus/ineffassign v0.0.0-20230610083614-0e73809eb601 // indirect
-	github.com/gorilla/handlers v1.5.1 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/gorilla/handlers v1.5.2 // indirect
+	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/gostaticanalysis/analysisutil v0.7.1 // indirect
 	github.com/gostaticanalysis/comment v1.4.2 // indirect
@@ -237,6 +256,7 @@ require (
 	github.com/oasisprotocol/curve25519-voi v0.0.0-20230904125328-1f23a7beb09a // indirect
 	github.com/oklog/run v1.1.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
+	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
 	github.com/petermattis/goid v0.0.0-20231207134359-e60b3f734c67 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -309,7 +329,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.22.0 // indirect
 	go.tmz.dev/musttag v0.7.2 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
-	go.uber.org/multierr v1.10.0 // indirect
+	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
 	golang.org/x/crypto v0.22.0 // indirect
 	golang.org/x/exp v0.0.0-20240404231335-c0f41cb1a7a0 // indirect
@@ -318,7 +338,7 @@ require (
 	golang.org/x/net v0.24.0 // indirect
 	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/sys v0.22.0 // indirect
 	golang.org/x/term v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
@@ -328,7 +348,7 @@ require (
 	google.golang.org/genproto v0.0.0-20240227224415-6ceb2ff114de // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240227224415-6ceb2ff114de // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240401170217-c3f982113cda // indirect
-	google.golang.org/protobuf v1.33.0 // indirect
+	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gotest.tools/v3 v3.5.1 // indirect

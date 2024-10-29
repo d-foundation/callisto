@@ -9,3 +9,7 @@ config.yaml
 
 # Coverage
 coverage.*
+
+.env
+
+db_data/
