@@ -1,0 +1,30 @@
+# groups table metadata
+table:
+  name: groups
+  schema: public
+array_relationships:
+  - name: group_members
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          name: group_members
+          schema: public
+  - name: group_policies
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          name: group_policies
+          schema: public
+select_permissions:
+  - permission:
+      allow_aggregations: true
+      columns:
+        - id
+        - admin_address
+        - metadata
+        - version
+        - created_at
+      filter: {}
+    role: anonymous

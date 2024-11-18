@@ -42,3 +42,8 @@
 - "!include public_validator_voting_power.yaml"
 - "!include public_vesting_account.yaml"
 - "!include public_vesting_period.yaml"
+- "!include public_dgov_oversight_committee_address.yaml"
+- "!include public_dgov_oversight_committee_params.yaml"
+- "!include public_groups.yaml"
+- "!include public_group_members.yaml"
+- "!include public_group_policies.yaml"

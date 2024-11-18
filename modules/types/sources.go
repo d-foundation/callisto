@@ -11,11 +11,13 @@ import (
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	govkeeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
+	grouptypes "github.com/cosmos/cosmos-sdk/x/group"
 	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
 	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	dgovtypes "github.com/d-foundation/protocol/x/dgov/types"
 	"github.com/forbole/juno/v6/node/local"
 
 	nodeconfig "github.com/forbole/juno/v6/node/config"
@@ -23,12 +25,16 @@ import (
 	banksource "github.com/forbole/callisto/v4/modules/bank/source"
 	localbanksource "github.com/forbole/callisto/v4/modules/bank/source/local"
 	remotebanksource "github.com/forbole/callisto/v4/modules/bank/source/remote"
+	dgovsource "github.com/forbole/callisto/v4/modules/dgov/source"
+	remotedgovsource "github.com/forbole/callisto/v4/modules/dgov/source/remote"
 	distrsource "github.com/forbole/callisto/v4/modules/distribution/source"
 	localdistrsource "github.com/forbole/callisto/v4/modules/distribution/source/local"
 	remotedistrsource "github.com/forbole/callisto/v4/modules/distribution/source/remote"
 	govsource "github.com/forbole/callisto/v4/modules/gov/source"
 	localgovsource "github.com/forbole/callisto/v4/modules/gov/source/local"
 	remotegovsource "github.com/forbole/callisto/v4/modules/gov/source/remote"
+	groupsource "github.com/forbole/callisto/v4/modules/group/source"
+	remotegroupsource "github.com/forbole/callisto/v4/modules/group/source/remote"
 	mintsource "github.com/forbole/callisto/v4/modules/mint/source"
 	localmintsource "github.com/forbole/callisto/v4/modules/mint/source/local"
 	remotemintsource "github.com/forbole/callisto/v4/modules/mint/source/remote"
@@ -48,6 +54,8 @@ type Sources struct {
 	MintSource     mintsource.Source
 	SlashingSource slashingsource.Source
 	StakingSource  stakingsource.Source
+	GroupSource    groupsource.Source
+	DgovSource     dgovsource.Source
 }
 
 func BuildSources(nodeCfg nodeconfig.Config, cdc codec.Codec) (*Sources, error) {
@@ -106,5 +114,7 @@ func buildRemoteSources(cfg *remote.Details) (*Sources, error) {
 		MintSource:     remotemintsource.NewSource(source, minttypes.NewQueryClient(source.GrpcConn)),
 		SlashingSource: remoteslashingsource.NewSource(source, slashingtypes.NewQueryClient(source.GrpcConn)),
 		StakingSource:  remotestakingsource.NewSource(source, stakingtypes.NewQueryClient(source.GrpcConn)),
+		GroupSource:    remotegroupsource.NewSource(source, grouptypes.NewQueryClient(source.GrpcConn)),
+		DgovSource:     remotedgovsource.NewSource(source, dgovtypes.NewQueryClient(source.GrpcConn)),
 	}, nil
 }
