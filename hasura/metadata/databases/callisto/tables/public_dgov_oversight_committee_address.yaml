@@ -1,0 +1,21 @@
+# dgov_oversight_committee_address table metadata
+table:
+  name: dgov_oversight_committee_address
+  schema: public
+object_relationships:
+  - name: group_policy
+    using:
+      manual_configuration:
+        column_mapping:
+          address: address
+        remote_table:
+          name: group_policies
+          schema: public
+select_permissions:
+  - permission:
+      allow_aggregations: true
+      columns:
+        - address
+        - height
+      filter: {}
+    role: anonymous

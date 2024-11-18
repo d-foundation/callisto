@@ -3,9 +3,9 @@ module github.com/forbole/callisto/v4
 go 1.21
 
 replace (
-	github.com/cosmos/cosmos-sdk => github.com/d-foundation/cosmos-sdk v0.0.0-20240820023506-6f2d52be7a55
+	//github.com/cosmos/cosmos-sdk => github.com/d-foundation/cosmos-sdk v0.0.0-20240820023506-6f2d52be7a55
 	github.com/forbole/juno/v6 => github.com/d-foundation/juno/v6 v6.0.1-dchain
-	//github.com/cosmos/cosmos-sdk => ../cosmos-sdk/
+	github.com/cosmos/cosmos-sdk => ../cosmos-sdk/
 	// Fix upstream GHSA-h395-qcrw-5vmq vulnerability.
 	// TODO Remove it: https://github.com/cosmos/cosmos-sdk/issues/10409
 	github.com/gin-gonic/gin => github.com/gin-gonic/gin v1.7.0

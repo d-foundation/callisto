@@ -21,8 +21,10 @@ import (
 	"github.com/forbole/callisto/v4/modules/auth"
 	"github.com/forbole/callisto/v4/modules/bank"
 	"github.com/forbole/callisto/v4/modules/consensus"
+	"github.com/forbole/callisto/v4/modules/dgov"
 	"github.com/forbole/callisto/v4/modules/distribution"
 	"github.com/forbole/callisto/v4/modules/feegrant"
+	"github.com/forbole/callisto/v4/modules/group"
 
 	juno "github.com/forbole/juno/v6/types"
 
@@ -90,6 +92,8 @@ func (r *Registrar) BuildModules(ctx registrar.Context) jmodules.Modules {
 	stakingModule := staking.NewModule(sources.StakingSource, r.cdc, db)
 	govModule := gov.NewModule(sources.GovSource, distrModule, mintModule, slashingModule, stakingModule, r.cdc, db)
 	upgradeModule := upgrade.NewModule(db, stakingModule)
+	groupModule := group.NewModule(sources.GroupSource, r.cdc, db)
+	dgovModule := dgov.NewModule(sources.DgovSource, r.cdc, db)
 
 	return []jmodules.Module{
 		messages.NewModule(r.parser, ctx.Database),
@@ -111,5 +115,7 @@ func (r *Registrar) BuildModules(ctx registrar.Context) jmodules.Modules {
 		slashingModule,
 		stakingModule,
 		upgradeModule,
+		groupModule,
+		dgovModule,
 	}
 }
