@@ -21,6 +21,7 @@ select_permissions:
     - gas_used
     - raw_log
     - logs
+    - extension_options
     filter: {}
     limit: 100
   role: anonymous

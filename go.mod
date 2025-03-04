@@ -4,7 +4,8 @@ go 1.21
 
 replace (
 	github.com/cosmos/cosmos-sdk => github.com/d-foundation/cosmos-sdk v0.0.0-20240820023506-6f2d52be7a55
-	github.com/forbole/juno/v6 => github.com/d-foundation/juno/v6 v6.0.3-dchain
+	github.com/d-foundation/protocol => github.com/d-foundation/private-protocol v0.3.0
+	github.com/forbole/juno/v6 => github.com/d-foundation/juno/v6 v6.0.4-dchain
 	// github.com/cosmos/cosmos-sdk => ../cosmos-sdk/
 	// Fix upstream GHSA-h395-qcrw-5vmq vulnerability.
 	// TODO Remove it: https://github.com/cosmos/cosmos-sdk/issues/10409
