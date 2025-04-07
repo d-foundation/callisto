@@ -5,6 +5,7 @@ import (
 
 	"github.com/forbole/juno/v6/node/remote"
 
+	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	distrkeeper "github.com/cosmos/cosmos-sdk/x/distribution/keeper"
@@ -44,6 +45,8 @@ import (
 	stakingsource "github.com/forbole/callisto/v4/modules/staking/source"
 	localstakingsource "github.com/forbole/callisto/v4/modules/staking/source/local"
 	remotestakingsource "github.com/forbole/callisto/v4/modules/staking/source/remote"
+	wasmSource "github.com/forbole/callisto/v4/modules/wasm/source"
+	remotedwasmsource "github.com/forbole/callisto/v4/modules/wasm/source/remote"
 	"github.com/forbole/callisto/v4/utils/simapp"
 )
 
@@ -56,6 +59,7 @@ type Sources struct {
 	StakingSource  stakingsource.Source
 	GroupSource    groupsource.Source
 	DgovSource     dgovsource.Source
+	WasmSource     wasmSource.Source
 }
 
 func BuildSources(nodeCfg nodeconfig.Config, cdc codec.Codec) (*Sources, error) {
@@ -116,5 +120,6 @@ func buildRemoteSources(cfg *remote.Details) (*Sources, error) {
 		StakingSource:  remotestakingsource.NewSource(source, stakingtypes.NewQueryClient(source.GrpcConn)),
 		GroupSource:    remotegroupsource.NewSource(source, grouptypes.NewQueryClient(source.GrpcConn)),
 		DgovSource:     remotedgovsource.NewSource(source, dgovtypes.NewQueryClient(source.GrpcConn)),
+		WasmSource:     remotedwasmsource.NewSource(source, wasmtypes.NewQueryClient(source.GrpcConn)),
 	}, nil
 }

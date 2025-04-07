@@ -25,6 +25,7 @@ import (
 	"github.com/forbole/callisto/v4/modules/distribution"
 	"github.com/forbole/callisto/v4/modules/feegrant"
 	"github.com/forbole/callisto/v4/modules/group"
+	"github.com/forbole/callisto/v4/modules/wasm"
 
 	juno "github.com/forbole/juno/v6/types"
 
@@ -94,6 +95,7 @@ func (r *Registrar) BuildModules(ctx registrar.Context) jmodules.Modules {
 	upgradeModule := upgrade.NewModule(db, stakingModule)
 	groupModule := group.NewModule(sources.GroupSource, r.cdc, db)
 	dgovModule := dgov.NewModule(sources.DgovSource, r.cdc, db)
+	wasmModule := wasm.NewModule(sources.WasmSource, r.cdc, db)
 
 	return []jmodules.Module{
 		messages.NewModule(r.parser, ctx.Database),
@@ -117,5 +119,6 @@ func (r *Registrar) BuildModules(ctx registrar.Context) jmodules.Modules {
 		upgradeModule,
 		groupModule,
 		dgovModule,
+		wasmModule,
 	}
 }

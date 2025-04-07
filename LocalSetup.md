@@ -38,7 +38,7 @@ cp -r dchain-config/ ~/.callisto
 Now you can parse the genesis file and start callisto
 
 ```sh
-callisto parse genesis-file
+callisto parse genesis-file --genesis-file-path ~/.callisto/genesis.json
 callisto start
 ```
 

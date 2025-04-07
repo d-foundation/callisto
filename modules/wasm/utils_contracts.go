@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/forbole/bdjuno/v4/types"
+	"github.com/forbole/callisto/v4/types"
 	"github.com/rs/zerolog/log"
 )
 
@@ -60,7 +60,7 @@ func (m *Module) getWasmCodes(height int64) ([]types.WasmCode, error) {
 
 	for _, c := range codes {
 		wasmCodes = append(wasmCodes, types.NewWasmCode(
-			"", c.DataHash, &c.InstantiatePermission, c.CodeID, height,
+			"", c.DataHash, &c.InstantiatePermission, c.CodeID, uint64(height),
 		))
 	}
 

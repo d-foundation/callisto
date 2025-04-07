@@ -32,12 +32,12 @@ type WasmCode struct {
 	WasmByteCode          []byte
 	InstantiatePermission *wasmtypes.AccessConfig
 	CodeID                uint64
-	Height                int64
+	Height                uint64
 }
 
 // NewWasmCode allows to build a new x/wasm code instance
 func NewWasmCode(
-	sender string, wasmByteCode []byte, initPermission *wasmtypes.AccessConfig, codeID uint64, height int64,
+	sender string, wasmByteCode []byte, initPermission *wasmtypes.AccessConfig, codeID uint64, height uint64,
 ) WasmCode {
 	return WasmCode{
 		Sender:                sender,

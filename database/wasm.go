@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+
 	dbtypes "github.com/forbole/callisto/v4/database/types"
 	dbutils "github.com/forbole/callisto/v4/database/utils"
 	"github.com/forbole/callisto/v4/types"
@@ -16,8 +17,8 @@ VALUES ($1, $2, $3)
 ON CONFLICT (one_row_id) DO UPDATE
 	SET code_upload_access = excluded.code_upload_access,
 		instantiate_default_permission = excluded.instantiate_default_permission,
-WHERE wasm_params.height <= excluded.height
-`
+		height = excluded.height
+WHERE wasm_params.height <= excluded.height`
 	accessConfig := dbtypes.NewDbAccessConfig(params.CodeUploadAccess)
 	cfgValue, _ := accessConfig.Value()
 	_, err := db.SQL.Exec(stmt,
@@ -189,6 +190,18 @@ sender = $1, admin = $2 WHERE contract_address = $2 `
 	_, err := db.SQL.Exec(stmt, sender, newAdmin, contractAddress)
 	if err != nil {
 		return fmt.Errorf("error while updating wsm contract admin: %s", err)
+	}
+	return nil
+}
+
+func (db *Db) UpdateMsgInvolvedAccountsAddresses(contractAddress string, txHash string) error {
+
+	stmt := `UPDATE message SET
+involved_accounts_addresses = ARRAY_APPEND(involved_accounts_addresses, $1) WHERE transaction_hash = $2 `
+
+	_, err := db.SQL.Exec(stmt, contractAddress, txHash)
+	if err != nil {
+		return fmt.Errorf("error while updating wasm contract message: %s", err)
 	}
 	return nil
 }

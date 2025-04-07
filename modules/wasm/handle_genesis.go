@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	tmtypes "github.com/tendermint/tendermint/types"
-	"github.com/forbole/bdjuno/v4/types"
+	tmtypes "github.com/cometbft/cometbft/types"
+	"github.com/forbole/callisto/v4/types"
 
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	"github.com/rs/zerolog/log"
@@ -58,7 +58,7 @@ func (m *Module) SaveGenesisCodes(codes []wasmtypes.Code, initHeight int64) erro
 	for _, code := range codes {
 		if code.CodeID != 0 {
 			wasmCodes = append(wasmCodes, types.NewWasmCode(
-				"", code.CodeBytes, &code.CodeInfo.InstantiateConfig, code.CodeID, initHeight,
+				"", code.CodeBytes, &code.CodeInfo.InstantiateConfig, code.CodeID, uint64(initHeight),
 			))
 		}
 	}
