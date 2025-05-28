@@ -4,8 +4,8 @@ go 1.21
 
 replace (
 	github.com/cosmos/cosmos-sdk => github.com/d-foundation/cosmos-sdk v0.0.0-20240820023506-6f2d52be7a55
-	github.com/d-foundation/protocol => github.com/d-foundation/private-protocol v0.3.0
-	github.com/forbole/juno/v6 => github.com/d-foundation/juno/v6 v6.0.4-dchain
+	// github.com/d-foundation/protocol => github.com/d-foundation/private-protocol v0.7.0
+	github.com/forbole/juno/v6 => github.com/d-foundation/juno/v6 v6.0.10-dchain
 	// github.com/cosmos/cosmos-sdk => ../cosmos-sdk/
 	// Fix upstream GHSA-h395-qcrw-5vmq vulnerability.
 	// TODO Remove it: https://github.com/cosmos/cosmos-sdk/issues/10409
@@ -26,7 +26,7 @@ require (
 	github.com/cometbft/cometbft v0.38.7
 	github.com/cosmos/cosmos-sdk v0.50.7
 	github.com/cosmos/gogoproto v1.4.12
-	github.com/d-foundation/protocol v0.3.0
+	github.com/d-foundation/protocol v0.7.0
 	github.com/forbole/juno/v6 v6.0.1
 	github.com/go-co-op/gocron v1.37.0
 	github.com/gogo/protobuf v1.3.2
