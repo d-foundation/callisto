@@ -3,7 +3,7 @@ services:
   hasura:
     image: hasura/graphql-engine:v2.1.0
     ports:
-      - "8080:8080"
+      - "${HASURA_PORT}:${HASURA_PORT}"
     restart: always
     environment:
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
@@ -29,7 +29,7 @@ services:
   #    - /callisto/.callisto:/callisto/.callisto
   postgres:
     image: postgres:13
-    container_name: bdjuno-postgres
+    container_name: postgres
     environment:
       POSTGRES_DB: bdjuno
       POSTGRES_USER: ${POSTGRES_USER}
